@@ -1,0 +1,12 @@
+FROM python:2.7
+
+RUN apt-get update
+
+RUN mkdir -p /prepare_elastic
+WORKDIR /prepare_elastic
+
+COPY ./config/seed.json /prepare_elastic
+COPY ./config/elasticsearch /prepare_elastic
+COPY ./bin/wait-for-it.sh /prepare_elastic/bin/wait-for-it.sh
+
+RUN pip install -r /prepare_elastic/requirements.txt

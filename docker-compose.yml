@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    command: ["./bin/wait-for-it.sh", "elasticsearch:9200", "--", "python", "app.py"]
+    ports:
+      - 8888:8888
+    links:
+      - mongodb
+      - elasticsearch
+    depends_on:
+      - mongodb
+      - elasticsearch
+
+  mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile.mongodb
+    ports:
+      - 27017:27017
+
+  prepare_elastic:
+    build:
+      context: .
+      dockerfile: Dockerfile.prepare_elastic
+    command: ["./bin/wait-for-it.sh", "elasticsearch:9200", "--", "python", "/prepare_elastic/prepare.py"]
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
+    ports:
+      - 9200:9200
+    environment:
+      - "http.host=0.0.0.0"
+      - "transport.host=127.0.0.1"
+      - "xpack.security.enabled=false"

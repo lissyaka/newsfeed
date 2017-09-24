@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h2 class="text-center">Search news</h2>
+<form class="form-inline" action="/news/search" method="POST">
+  <div class="form-group news-search-holder">
+    <input type="text" class="form-control news-search-input" name="text_query" id="search" placeholder="Search">	
+  </div>
+
+  {% module xsrf_form_html() %}
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Search</button>
+  </div>
+</form>
+
+<br>
+{% for item in news %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a href="{{ "/news/" + item["slug"] }}"><h4>{{ item["title"] }}</h4></a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <div class="media">
+        <div class="media-left">
+          <img class="media-object" src={{ item["image"] }} width="100" height="100">
+        </div>
+        <div class="media-body">
+          {% raw item["body"][:500] %}
+
+          <div class="clearfix"></div>
+        </div>
+	      <div class="more label">
+	      	<a href={{ "/news/" + item["slug"] }}>Read more</a>
+	      </div>
+      </div>
+    </div>
+  </div>
+
+ 	<br>
+{% end %}
+
+{% end %}

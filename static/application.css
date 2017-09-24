@@ -1,0 +1,15 @@
+.article-image {
+	max-width: 100%;
+	height: auto;
+	border-radius: 50%;
+	display: block;
+	margin: auto
+}
+
+.news-search-input {
+	width: 100% !important;
+}
+
+.news-search-holder {
+	width: 50%;
+}

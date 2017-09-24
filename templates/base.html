@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>News Feed</title>
+    <link rel="stylesheet" href="{{ static_url("bootstrap.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ static_url("application.css") }}" type="text/css">
+    {% block head %}{% end %}
+  </head>
+  <body>
+    <div class="container">
+      <a href="/" role="button"><h1 class="text-center">News Feed</h1></a>
+
+      <div class="row">
+        {% block body %}{% end %}
+      </div>
+    </div>
+  </body>
+</html>

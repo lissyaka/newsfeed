@@ -1,0 +1,3 @@
+FROM mongo:3.4.9
+
+COPY ./config/mongodb/seed.js /docker-entrypoint-initdb.d/

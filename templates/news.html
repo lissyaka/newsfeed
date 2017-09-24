@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a class="btn btn-default" href="/news/new" role="button">Create news</a>
+<a class="btn btn-default text-right" href="/news/search" role="button">Search</a>
+<p class="text-right"><b>Total: {{ total_count }}</b></p>
+ 
+{% for item in news %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a href="{{ "/news/" + item["slug"] }}"><h4>{{ item["title"] }}</h4></a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <div class="media">
+        <div class="media-left">
+          <img class="media-object" src={{ item["image"] }} width="100" height="100">
+        </div>
+        <div class="media-body">
+          {% raw item["body"][:500] %}
+
+          <div class="clearfix"></div>
+        </div>
+        <div class="more label">
+        	<a href={{ "/news/" + item["slug"] }}>Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% end %}
+
+{% end %}

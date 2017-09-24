@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h3 class="text-center"><b>{{ news["title"] }}</b></h3>          
+
+  <img src={{ news["image"] }} class="article-image">
+
+  <div class="body">
+    {% raw news["body"] %}
+  </div>
+
+{% end %}
+
